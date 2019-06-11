@@ -2,7 +2,9 @@ import { driver, browser } from './driver';
 import Screenshot from '../selenium/Screenshot';
 import PageFactory from '../pages/Factory';
 
-module.exports = function World() {
+import { setWorldConstructor, setDefaultTimeout } from 'cucumber'
+
+function World() {
   this.driver = driver;
   this.browser = browser;
 
@@ -11,3 +13,5 @@ module.exports = function World() {
 
   this.pageFactory = new PageFactory(this);
 };
+
+setWorldConstructor(World)

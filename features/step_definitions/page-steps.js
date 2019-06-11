@@ -1,12 +1,8 @@
-import { expect } from 'chai';
-import World from '../support/world';
+import { Given } from 'cucumber'
 
-module.exports = function() {
-  this.World = World;
+Given(/^I have navigated to the (.+) page$/, function(pageName) {
+  this.page = this.pageFactory.create(pageName);
 
-  this.Given(/^I have navigated to the (.+) page$/, function(pageName) {
-    this.page = this.pageFactory.create(pageName);
-    return this.page.loadAndWaitUntilVisible();
-  });
+  return this.page.loadAndWaitUntilVisible();
+});
 
-};

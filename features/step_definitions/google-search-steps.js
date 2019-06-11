@@ -1,15 +1,11 @@
 import { expect } from 'chai';
-import World from '../support/world';
+import { When, Then } from 'cucumber'
 
-module.exports = function() {
-  this.World = World;
+When(/^I search for "([^"]*)"$/, function(searchQuery) {
+  return this.page.searchFor(searchQuery);
+});
 
-  this.When(/^I search for "([^"]*)"$/, function(searchQuery) {
-    return this.page.searchFor(searchQuery);
-  });
+Then(/^I see results$/, function() {
+  return this.page.numberOfResults().then((numberOfResults) => expect(numberOfResults).to.be.above(0));
+});
 
-  this.Then(/^I see results$/, function() {
-    return this.page.numberOfResults().then((numberOfResults) => expect(numberOfResults).to.be.above(0));
-  });
-
-};
